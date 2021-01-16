@@ -1,0 +1,30 @@
+.form-sign {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+
+  &__label {
+    font-size: 1.2rem;
+  }
+
+  &__input {
+    background-color: $color-dark;
+    color: $color-white;
+    border: none;
+    height: 3rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border-bottom: 2px solid $color-dark-4;
+    margin-bottom: 1rem;
+
+    &:focus {
+      border-bottom: 2px solid $color-white;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $color-white;
+      font-size: 1.6rem;
+    }
+  }
+}

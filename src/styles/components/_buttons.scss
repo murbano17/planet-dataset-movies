@@ -1,0 +1,17 @@
+.btn {
+  font-family: inherit;
+  border: none;
+  color: inherit;
+  background-color: transparent;
+
+  &-sign {
+    margin-right: 4rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: $color-dark-4;
+
+    &--active {
+      color: $color-white;
+    }
+  }
+}

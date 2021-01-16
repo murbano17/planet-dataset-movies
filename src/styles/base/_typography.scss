@@ -1,0 +1,16 @@
+body {
+  font-family: "Karla", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  padding: 3rem;
+  color: $color-white;
+}
+.heading {
+  &__h1 {
+    line-height: 1;
+    display: inline-block;
+    padding-bottom: 0rem;
+    font-size: 3.5rem;
+    border-bottom: 0.3rem solid $color-red-light;
+  }
+}
