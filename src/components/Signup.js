@@ -1,27 +1,31 @@
 import React, { useState } from "react";
 import { withAuth } from "../lib/AuthProvider";
+import { useForm } from "../custom-hooks/useForm";
+import { useValidationForm } from "../custom-hooks/validationForm";
 
 const SignUp = (props) => {
-  const formContact = { firstName: "", lastName: "", email: "", password: "" };
+  const [values, handleInputChange] = useForm({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-  const [user, setUser] = useState(formContact);
-  console.log(user);
+  const [handleInputValidations, message] = useValidationForm(values);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    props.signup(user);
-    setUser(formContact);
+    const validationForm = handleInputValidations(values);
+    if (validationForm) {
+      props.signup(values);
+    }
   };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-  };
+  const { firstName, lastName, email, password } = values;
 
   return (
     <form className="form-sign" onSubmit={handleFormSubmit}>
       <label className="form-sign__label" htmlFor="sign-first-name">
-        First name:
+        First name <span className="form-sign__label--required">*</span>
       </label>
       <input
         placeholder="First Name"
@@ -29,12 +33,12 @@ const SignUp = (props) => {
         className="form-sign__input"
         type="text"
         name="firstName"
-        value={user.firstName}
-        onChange={handleChange}
+        value={firstName}
+        onChange={handleInputChange}
       />
 
       <label className="form-sign__label" htmlFor="sign-last-name">
-        Last name:
+        Last name <span className="form-sign__label--required">*</span>
       </label>
       <input
         placeholder="Last Name"
@@ -42,34 +46,38 @@ const SignUp = (props) => {
         className="form-sign__input"
         type="text"
         name="lastName"
-        value={user.lastName}
-        onChange={handleChange}
+        value={lastName}
+        onChange={handleInputChange}
       />
       <label className="form-sign__label" htmlFor="sign-email">
-        Email:
+        Email <span className="form-sign__label--required">*</span>
       </label>
       <input
+        type="text"
         placeholder="Email"
         id="sign-email"
         className="form-sign__input"
-        type="email"
         name="email"
-        value={user.email}
-        onChange={handleChange}
+        value={email}
+        onChange={handleInputChange}
       />
       <label className="form-sign__label" htmlFor="sign-password">
-        Password:
+        Password <span className="form-sign__label--required">*</span>
       </label>
       <input
+        type="password"
         placeholder="******"
         id="sign-password"
         className="form-sign__input"
-        type="password"
         name="password"
-        value={user.password}
-        onChange={handleChange}
+        autoComplete="none"
+        value={password}
+        onChange={handleInputChange}
       />
-      <button type="submit">Sign up</button>
+        {message && <p className="form-sign__error">{message}</p>} 
+      <button className="btn btn-secondary" type="submit">
+        Sign up
+      </button>
     </form>
   );
 };

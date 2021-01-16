@@ -4,7 +4,11 @@
   margin-top: 2rem;
 
   &__label {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    color: $color-dark-4;
+    &--required {
+      color: $color-red-light;
+    }
   }
 
   &__input {
@@ -21,10 +25,15 @@
       border-bottom: 2px solid $color-white;
       outline: none;
     }
-
+    //cuando focus, eliminar placeholder
     &::placeholder {
       color: $color-white;
       font-size: 1.6rem;
     }
+  }
+
+  &__error {
+    color: $color-red-light;
+    font-size: 1.6rem;
   }
 }

@@ -1,51 +1,54 @@
 import React, { useState } from "react";
 import { withAuth } from "../lib/AuthProvider";
+import { useForm } from "../custom-hooks/useForm";
+import { useValidationForm } from "../custom-hooks/validationForm";
 
 const LogIn = (props) => {
-  const formContact = { email: "", password: "" };
-
-  const [user, setUser] = useState(formContact);
-  console.log(user);
+  const [values, handleInputChange] = useForm({ email: "", password: "" });
+  const [handleInputValidations, message] = useValidationForm(values);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    props.login(user);
-    setUser(formContact);
+    const validationForm = handleInputValidations(values);
+    if (validationForm) {
+      props.login(values);
+    }
   };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-  };
+  const { email, password } = values;
 
   return (
     <form className="form-sign" onSubmit={handleFormSubmit}>
       <label className="form-sign__label" htmlFor="log-email">
-        Email:
+        Email <span className="form-sign__label--required">*</span>
       </label>
       <input
+        type="text"
         placeholder="email@email.com"
         id="log-email"
         className="form-sign__input"
-        type="text"
         name="email"
-        value={user.email}
-        onChange={handleChange}
+        autoComplete="none"
+        value={email}
+        onChange={handleInputChange}
       />
-
       <label className="form-sign__label" htmlFor="log-password">
-        Password:
+        Password <span className="form-sign__label--required">*</span>
       </label>
       <input
         type="password"
         placeholder="******"
         id="log-password"
         className="form-sign__input"
-        value={user.password}
-        onChange={handleChange}
         name="password"
+        autoComplete="none"
+        value={password}
+        onChange={handleInputChange}
       />
-      <button type="submit">Log in</button>
+      {message && <p className="form-sign__error">{message}</p>}
+
+      <button className="btn btn-secondary" type="submit">
+        Log in
+      </button>
     </form>
   );
 };

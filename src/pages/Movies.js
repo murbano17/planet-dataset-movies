@@ -18,11 +18,11 @@ const Movies = () => {
   return (
     <>
       <h1 className="heading__h1">Explore</h1>
-      <ul className='movie__list'>
+      <ul className="movie__list">
         {movies.map((movie) => {
           return (
-            <li className='movie__list-item'>
-              <MovieCard key={movie.id} movie={movie} />
+            <li className="movie__list-item" key={movie.id}>
+              <MovieCard movie={movie} />
             </li>
           );
         })}

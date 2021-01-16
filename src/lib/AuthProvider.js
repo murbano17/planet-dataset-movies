@@ -40,11 +40,9 @@ class AuthProvider extends React.Component {
       );
   }
 
-  signup = (user) => {
-    const { username, email, password } = user;
-
+  signup = ({ firstName, lastName, email, password }) => {
     auth
-      .signup({ username, email, password })
+      .signup({ firstName, lastName, email, password })
       .then((user) => this.setState({ isLogged: true, user }))
       .catch(({ response }) =>
         this.setState({ message: response.data.statusMessage })
@@ -55,9 +53,7 @@ class AuthProvider extends React.Component {
     await auth.me();
   };
 
-  login = (user) => {
-    const { email, password } = user;
-    console.log(user);
+  login = ({ email, password }) => {
     auth
       .login({ email, password })
       .then((user) => this.setState({ isLogged: true, user: user.data.user }))
@@ -72,16 +68,14 @@ class AuthProvider extends React.Component {
   render() {
     // destructuramos isLoading, isLoggedin y user de this.state y login, logout y signup de this
     const { isLoading, isLogged, user } = this.state;
-    const { login, logout, signup, loginGoogle, me } = this;
+    const { login, logout, signup, me } = this;
 
     return isLoading ? (
       // si está loading, devuelve un <div> y sino devuelve un componente <Provider> con un objeto con los valores: { isLoggedin, user, login, logout, signup}
       // el objeto pasado en la prop value estará disponible para todos los componentes <Consumer>
       <div>Loading</div>
     ) : (
-      <Provider
-        value={{ isLogged, user, login, logout, signup, loginGoogle, me }}
-      >
+      <Provider value={{ isLogged, user, login, logout, signup, me }}>
         {this.props.children}
       </Provider>
     ); /*<Provider> "value={}" datos que estarán disponibles para todos los componentes <Consumer> */

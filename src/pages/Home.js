@@ -15,8 +15,8 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1 className="home__logo">Planet Movies</h1>
-
+{/*       <h1 className="home__logo">Planet Movies</h1>
+ */}
       {signup ? (
         <h2 className="home__welcome">Welcome!</h2>
       ) : (

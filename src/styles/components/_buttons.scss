@@ -3,6 +3,7 @@
   border: none;
   color: inherit;
   background-color: transparent;
+  outline: none;
 
   &-sign {
     margin-right: 4rem;
@@ -13,5 +14,13 @@
     &--active {
       color: $color-white;
     }
+  }
+
+  &-secondary {
+    background-color: $color-dark-4;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
   }
 }
