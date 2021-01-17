@@ -8,13 +8,19 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    let isCancelled = false;
+    const getMovies = async () => {
+      const result = await services.movies();
+      if (!isCancelled) {
+        setMovies(result);
+      }
+    };
     getMovies();
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
-  const getMovies = async () => {
-    const dbMovies = await services.movies();
-    setMovies(dbMovies);
-  };
   return (
     <>
       <h1 className="heading__h1">Explore</h1>

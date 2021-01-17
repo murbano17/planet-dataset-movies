@@ -29,6 +29,11 @@
     &::placeholder {
       color: $color-white;
       font-size: 1.6rem;
+      opacity: 1;
+    }
+    ::-moz-placeholder {
+      color: $color-white;
+      opacity: 1;
     }
   }
 

@@ -7,13 +7,14 @@ const withAuth = (WrappedComponent) => {
     render() {
       return (
         <Consumer>
-          {({ login, signup, user, logout, isLogged }) => {
+          {({ login, signup, user, logout, editprofile, isLogged }) => {
             return (
               <WrappedComponent
                 login={login}
                 signup={signup}
                 user={user}
                 logout={logout}
+                editprofile={editprofile}
                 isLogged={isLogged}
                 {...this.props}
               />
@@ -43,7 +44,7 @@ class AuthProvider extends React.Component {
   signup = ({ firstName, lastName, email, password }) => {
     auth
       .signup({ firstName, lastName, email, password })
-      .then((user) => this.setState({ isLogged: true, user }))
+      .then((user) => this.setState({ isLogged: true, user: user.data.user }))
       .catch(({ response }) =>
         this.setState({ message: response.data.statusMessage })
       );
@@ -65,17 +66,26 @@ class AuthProvider extends React.Component {
     this.setState({ isLogged: false, user: null });
   };
 
+  editprofile = ({ first_name, last_name, password }) => {
+    auth
+      .editprofile({ first_name, last_name, password })
+      .then((user) => this.setState({ isLogged: true, user: user }))
+      .catch((err) => console.log(err));
+  };
+
   render() {
     // destructuramos isLoading, isLoggedin y user de this.state y login, logout y signup de this
     const { isLoading, isLogged, user } = this.state;
-    const { login, logout, signup, me } = this;
+    const { login, logout, signup, me, editprofile } = this;
 
     return isLoading ? (
       // si está loading, devuelve un <div> y sino devuelve un componente <Provider> con un objeto con los valores: { isLoggedin, user, login, logout, signup}
       // el objeto pasado en la prop value estará disponible para todos los componentes <Consumer>
       <div>Loading</div>
     ) : (
-      <Provider value={{ isLogged, user, login, logout, signup, me }}>
+      <Provider
+        value={{ isLogged, user, login, logout, signup, me, editprofile }}
+      >
         {this.props.children}
       </Provider>
     ); /*<Provider> "value={}" datos que estarán disponibles para todos los componentes <Consumer> */

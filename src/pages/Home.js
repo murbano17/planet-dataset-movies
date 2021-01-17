@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
 import { withAuth } from "../lib/AuthProvider";
@@ -15,8 +15,6 @@ const Home = () => {
 
   return (
     <div className="home">
-{/*       <h1 className="home__logo">Planet Movies</h1>
- */}
       {signup ? (
         <h2 className="home__welcome">Welcome!</h2>
       ) : (

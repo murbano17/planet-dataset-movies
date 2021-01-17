@@ -1,3 +1,4 @@
+import { faConnectdevelop } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import authHeader from "./auth-header";
 
@@ -12,9 +13,7 @@ class Auth {
     formData.append("user[email]", email);
     formData.append("user[password]", password);
     try {
-      const response = await axios.post(this.baseUrl + "/users", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(this.baseUrl + "/users", formData);
 
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
@@ -33,10 +32,7 @@ class Auth {
     try {
       const response = await axios.post(
         this.baseUrl + "/users/login",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        formData
       );
 
       if (response.data.token) {
@@ -58,7 +54,6 @@ class Auth {
       const response = await axios.get(this.baseUrl + "/users/profile", {
         headers: authHeader(),
       });
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -66,8 +61,11 @@ class Auth {
   };
 
   movies = async () => {
+    const url = this.baseUrl + `/movies`;
     try {
-      const response = await axios.get(this.baseUrl + "/movies", {
+      const response = await axios({
+        method: "get",
+        url: url,
         headers: authHeader(),
       });
       return response.data;
@@ -75,8 +73,45 @@ class Auth {
       console.log(error);
     }
   };
-}
 
+  movieid = async (id) => {
+    const url = this.baseUrl + `/movies/${id}`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        params: {
+          movie_id: id,
+        },
+        headers: authHeader(),
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  editprofile = async ({ first_name, last_name, password }) => {
+    let formData = new FormData();
+    formData.append("user[first_name]", first_name);
+    formData.append("user[last_name]", last_name);
+    formData.append("user[password]", password);
+
+    console.log(formData, "formdata");
+    const url = this.baseUrl + "/users/profile";
+    try {
+      const response = await axios.put(
+        this.baseUrl + "/users/profile",
+        formData,
+        { headers: authHeader() }
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 const axiosRequestFunctions = new Auth();
 
 export default axiosRequestFunctions;

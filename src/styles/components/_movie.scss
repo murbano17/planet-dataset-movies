@@ -1,0 +1,22 @@
+.movie {
+  &__image {
+    width: 100%;
+    margin-bottom: 1.2rem;
+  }
+  &__title {
+    display: inline-block;
+    font-size: 2.3rem;
+    line-height: 1;
+    font-weight: 700;
+    border-bottom: 0.3rem solid $color-red-light;
+  }
+  &__director {
+    font-size: 2rem;
+    font-weight: 300;
+    color: $color-dark-4;
+  }
+  &__year-country {
+    color: $color-dark-4;
+    font-size: 1.6rem;
+  }
+}

@@ -1,7 +1,7 @@
 body {
   font-family: "Karla", sans-serif;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.5;
   padding: 3rem;
   color: $color-white;
 }
@@ -13,4 +13,9 @@ body {
     font-size: 3.5rem;
     border-bottom: 0.3rem solid $color-red-light;
   }
+}
+.paragraph {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.3;
 }

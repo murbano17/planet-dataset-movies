@@ -9,10 +9,11 @@ export const useValidationForm = () => {
       if (!fields[i]) {
         setMessage("* Please complete all the required fields ");
         return false;
-      } else if (!isEmail(fields.email)) {
-        setMessage("* Email is not valid ");
-        return false;
       }
+    }
+    if (!isEmail(fields.email)) {
+      setMessage("* Email is not valid ");
+      return false;
     }
     return true;
   };
