@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withAuth } from "../lib/AuthProvider";
 import services from "../lib/AuthService";
+import MovieRated from "../components/MovieRated";
 
 export const MovieDetails = (props) => {
   const [movie, setMovie] = useState({});
@@ -34,6 +35,7 @@ export const MovieDetails = (props) => {
         {movie.year} - {movie.country}
       </p>
       <p className="movie__description paragraph">{movie.description}</p>
+      <MovieRated id={movie.id} />
     </div>
   );
 };

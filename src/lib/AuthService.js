@@ -1,4 +1,3 @@
-import { faConnectdevelop } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import authHeader from "./auth-header";
 
@@ -52,9 +51,29 @@ class Auth {
   me = async () => {
     try {
       const response = await axios.get(this.baseUrl + "/users/profile", {
-        headers: authHeader(),
+        headers: {
+          Authorization: authHeader(),
+        },
       });
       return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  editprofile = async ({ first_name, last_name, password }) => {
+    let formData = new FormData();
+    formData.append("user[first_name]", first_name);
+    formData.append("user[last_name]", last_name);
+    formData.append("user[password]", password);
+    const url = this.baseUrl + "/users/profile";
+    try {
+      const response = await axios.put(url, formData, {
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +85,9 @@ class Auth {
       const response = await axios({
         method: "get",
         url: url,
-        headers: authHeader(),
+        headers: {
+          Authorization: authHeader(),
+        },
       });
       return response.data;
     } catch (error) {
@@ -83,30 +104,31 @@ class Auth {
         params: {
           movie_id: id,
         },
-        headers: authHeader(),
+        headers: {
+          Authorization: authHeader(),
+        },
       });
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
-
-  editprofile = async ({ first_name, last_name, password }) => {
-    let formData = new FormData();
-    formData.append("user[first_name]", first_name);
-    formData.append("user[last_name]", last_name);
-    formData.append("user[password]", password);
-
-    console.log(formData, "formdata");
-    const url = this.baseUrl + "/users/profile";
+  ratemovie = async (id, score) => {
+    const url = this.baseUrl + `/movies/${id}/rate`;
     try {
-      const response = await axios.put(
-        this.baseUrl + "/users/profile",
-        formData,
-        { headers: authHeader() }
-      );
+      const response = await axios({
+        method: "post",
+        url: url,
+        data: {
+          movie_id: id,
+          score: score,
+        },
+        headers: {
+          Authorization: authHeader(),
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      });
       console.log(response);
-      return response.data;
     } catch (error) {
       console.log(error);
     }

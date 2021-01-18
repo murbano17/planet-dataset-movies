@@ -4,7 +4,7 @@ import { withAuth } from "../lib/AuthProvider";
 
 import MovieCard from "../components/MovieCard";
 
-const Movies = () => {
+const AllMovies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const Movies = () => {
   );
 };
 
-export default withAuth(Movies);
+export default withAuth(AllMovies);

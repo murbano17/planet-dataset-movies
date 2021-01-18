@@ -1,0 +1,22 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__welcome {
+    display: inline-block;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+  &__my-profile {
+    background-color: rgba($color-white, 0.1);
+    padding: 3rem;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    &-info {
+    }
+    &-label {
+      color: $color-blue;
+    }
+  }
+}

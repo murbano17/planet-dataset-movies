@@ -1,0 +1,38 @@
+.rating {
+  display: flex;
+  transform: rotateY(180deg);
+  position: absolute;
+
+  input {
+    display: none;
+  }
+  label {
+    cursor: pointer;
+    width: 3rem;
+
+    &::before {
+      position: absolute;
+      content: "\f005";
+      font-family: fontAwesome;
+      font-size: 3rem;
+      color: $color-dark-4;
+    }
+    &::after {
+      position: absolute;
+      content: "\f005";
+      font-family: fontAwesome;
+      font-size: 3rem;
+      color: orange;
+      opacity: 0;
+      transition: 0.5s;
+    }
+  }
+}
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+  opacity: 1;
+}
+.margin-top {
+  margin-top: 4rem;
+}

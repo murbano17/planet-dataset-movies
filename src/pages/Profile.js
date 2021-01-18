@@ -15,14 +15,14 @@ const Profile = (props) => {
   };
 
   return (
-    <div className="home">
+    <div className="profile">
       {profile ? (
-        <h2 className="home__welcome">My profile</h2>
+        <h2 className="profile__welcome">My profile</h2>
       ) : (
-        <h2 className="home__welcome">Edit Profile</h2>
+        <h2 className="profile__welcome">Edit Profile</h2>
       )}
 
-      <div className="home__buttons-container">
+      <div className="profile__buttons-container">
         <button
           onClick={() => toggleHandlerProfile()}
           className={profile ? "btn btn-sign btn-sign--active" : "btn btn-sign"}

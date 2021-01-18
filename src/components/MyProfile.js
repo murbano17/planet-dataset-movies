@@ -4,10 +4,19 @@ import { withAuth } from "../lib/AuthProvider";
 const MyProfile = ({ user }) => {
   const { first_name, last_name, email } = user;
   return (
-    <div>
-      <p>First name: {first_name}</p>
-      <p>Last name: {last_name}</p>
-      <p>Email: {email}</p>
+    <div className="profile__my-profile">
+      <p className="profile__my-profile-info">
+        <span className="profile__my-profile-label">First name:</span>{" "}
+        {first_name}
+      </p>
+      <p className="profile__my-profile-info">
+        <span className="profile__my-profile-label">Last name:</span>{" "}
+        {last_name}
+      </p>
+      <p className="profile__my-profile-info">
+        <span className="profile__my-profile-label">Email: </span>
+        {email}
+      </p>
     </div>
   );
 };
