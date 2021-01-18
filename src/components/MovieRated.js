@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { withAuth } from "../lib/AuthProvider";
 import { useForm } from "../custom-hooks/useForm";
 import { parseInt } from "lodash";
 import services from "../lib/AuthService";
 
-const MovieRated = ({ id }) => {
+const MovieRated = (props) => {
   const [values, handleInputChange] = useForm({
     score: "",
   });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const movieId = id;
+    const movieId = props.id;
     const entireNumber = Number(parseInt(values.score, 10));
     services.ratemovie(movieId, entireNumber);
+    props.setIsRated(true);
   };
 
   return (

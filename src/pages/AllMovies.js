@@ -21,6 +21,9 @@ const AllMovies = () => {
     };
   }, []);
 
+
+
+
   return (
     <>
       <h1 className="heading__h1">Explore</h1>

@@ -36,3 +36,11 @@
 .margin-top {
   margin-top: 4rem;
 }
+
+.icon::after {
+  content: "\f005";
+  font-family: fontAwesome;
+  color: white;
+  font-size: 3rem;
+  width: 3rem;
+}

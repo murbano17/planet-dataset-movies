@@ -37,7 +37,6 @@ class Auth {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
       }
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -113,6 +112,7 @@ class Auth {
       console.log(error);
     }
   };
+
   ratemovie = async (id, score) => {
     const url = this.baseUrl + `/movies/${id}/rate`;
     try {
@@ -129,6 +129,57 @@ class Auth {
         },
       });
       console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  moviesrated = async () => {
+    const url = this.baseUrl + `/movies/rated`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  moviesrating = async () => {
+    const url = this.baseUrl + `/ratings`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getRating = async (id) => {
+     console.log(id);
+    const url = this.baseUrl + `/ratings/${id}`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        params: {
+          rating_id: id,
+        },
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      return response.data;
     } catch (error) {
       console.log(error);
     }
