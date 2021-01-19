@@ -165,8 +165,28 @@ class Auth {
     }
   };
 
-  getRating = async (id) => {
-     console.log(id);
+  editrating = async (id, score) => {
+    const url = this.baseUrl + `/ratings/${id}`;
+    try {
+      const response = await axios({
+        method: "put",
+        url: url,
+        data: {
+          rating_id: id,
+          score: score,
+        },
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getrating = async (id) => {
     const url = this.baseUrl + `/ratings/${id}`;
     try {
       const response = await axios({
@@ -179,6 +199,7 @@ class Auth {
           Authorization: authHeader(),
         },
       });
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);

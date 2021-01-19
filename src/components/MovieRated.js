@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withAuth } from "../lib/AuthProvider";
 import { useForm } from "../custom-hooks/useForm";
 import { parseInt } from "lodash";
@@ -8,8 +8,15 @@ const MovieRated = (props) => {
   const [values, handleInputChange] = useForm({
     score: "",
   });
+  const [isRated, setIsRated] = useState(props.isRated);
+  const [movieRated, setMovieRated] = useState({});
 
-  const handleFormSubmit = (e) => {
+  useEffect(() => {
+    setIsRated(props.isRated);
+    setMovieRated(props.movieRated);
+  }, [props.isRated, props.movieRated, props.id]);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const movieId = props.id;
     const entireNumber = Number(parseInt(values.score, 10));
@@ -17,9 +24,28 @@ const MovieRated = (props) => {
     props.setIsRated(true);
   };
 
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const entireNumber = Number(parseInt(values.score, 10));
+
+    await services.editrating(props.movieRated.id, entireNumber);
+    const updateValuesMovie = await services.getrating(props.movieRated.id);
+
+    console.log(updateValuesMovie);
+    props.setMovieRated(updateValuesMovie);
+    props.setIsRated(true);
+  };
+
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      {isRated ? (
+        <p>
+          You rated this film with a score of <span>{movieRated.score}/5</span>
+        </p>
+      ) : (
+        <p>Rate this movie now!</p>
+      )}
+      <form onSubmit={isRated ? handleEditSubmit : handleFormSubmit}>
         <div className="rating">
           <input
             type="radio"
@@ -63,9 +89,15 @@ const MovieRated = (props) => {
           />
           <label htmlFor="rate-1"></label>
         </div>
-        <button className="btn btn-secondary margin-top" type="submit">
-          Rate
-        </button>
+        {isRated ? (
+          <button className="btn btn-secondary margin-top" type="submit">
+            Update Rate
+          </button>
+        ) : (
+          <button className="btn btn-secondary margin-top" type="submit">
+            Rate
+          </button>
+        )}
       </form>
     </>
   );

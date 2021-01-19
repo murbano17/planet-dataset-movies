@@ -3,51 +3,59 @@ import { withAuth } from "../lib/AuthProvider";
 import services from "../lib/AuthService";
 import MovieRated from "../components/MovieRated";
 import MovieDescription from "../components/MovieDescription";
-import EditRated from "../components/EditRated";
 
 export const MovieDetails = (props) => {
   const [movie, setMovie] = useState({});
   const [isRated, setIsRated] = useState(false);
   const [movieRated, setMovieRated] = useState({});
+  console.log(movieRated);
 
   useEffect(() => {
     let isCancelled = false;
 
     const getMovie = async () => {
-      const movie = await services.movieid(props.match.params.id);
+      const movie = await getOneMovie();
       if (!isCancelled) {
         setMovie(movie);
+        getFilteredMovies();
       }
     };
-    //filtramos si la película ya ha sido valorada o no
-    const filterMovies = async () => {
-      const moviesRated = await services.moviesrating();
-      const movie = await services.movieid(props.match.params.id);
 
-      moviesRated.filter((oneMovie) => {
-        if (oneMovie.movie.id === movie.id && !isCancelled) {
-          setIsRated(true);
-          console.log(oneMovie);
-          setMovieRated(oneMovie);
-        }
-        return;
-      });
-    };
     getMovie();
-    filterMovies();
     return () => {
       isCancelled = true;
     };
   }, [isRated]);
 
+  const getOneMovie = async () => {
+    const movie = await services.movieid(props.match.params.id);
+    return movie;
+  };
+
+  const getFilteredMovies = async () => {
+    const moviesRated = await services.moviesrating();
+    const movieDetail = await services.movieid(props.match.params.id);
+    moviesRated.filter((oneMovie) => {
+      if (oneMovie.movie.id === movieDetail.id) {
+        setMovieRated(oneMovie);
+        setIsRated(true);
+      }
+    });
+  };
+
   return (
     <>
       <MovieDescription movie={movie} />
-      {isRated ? (
-        <EditRated id={movie.id} movieRated={movieRated} />
-      ) : (
-        <MovieRated id={movie.id} setIsRated={setIsRated} />
-      )}
+
+      <MovieRated
+        id={movie.id}
+        setIsRated={setIsRated}
+        isRated={isRated}
+        movieRated={movieRated}
+        setMovie={setMovie}
+        setMovieRated={setMovieRated}
+
+      />
     </>
   );
 };

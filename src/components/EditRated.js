@@ -14,7 +14,10 @@ const EditRated = ({ movieRated }) => {
       <div>
         <p>You rated this film with a score of: </p>
         <p>
-          {movie.score}/5 <span className="icon"></span>
+          {movie.score}/5{" "}
+          {[...Array(movie.score)].map((e, i) => (
+            <span key={i} className="icon"></span>
+          ))}
         </p>
         Do you want to edit this score?
       </div>
