@@ -4,6 +4,7 @@
   color: inherit;
   background-color: transparent;
   outline: none;
+  transition: all 0.3s;
 
   &-sign {
     margin-right: 4rem;
@@ -13,16 +14,42 @@
 
     &--active {
       color: $color-white;
-      border-bottom: 0.3rem solid $color-red-light;
-
+      border-bottom: 0.3rem solid $color-yellow;
     }
   }
 
   &-secondary {
-    background-color: $color-dark-4;
     padding: 1rem;
     font-weight: 600;
     font-size: 1.8rem;
     margin-top: 1.5rem;
+    color: $color-dark;
+    border: 0.3rem solid $color-dark;
+    background-color: $color-yellow;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: darken($color-yellow, 8);
+      letter-spacing: 0.5rem;
+    }
+  }
+
+  &-tertiary {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    color: $color-white;
+    background-color: $color-dark;
+    border: 1px solid $color-yellow;
+    transition: all 0.3s ease-in-out;
+
+    cursor: pointer;
+    &:hover {
+      background-color: darken($color-yellow, 8);
+      color: $color-dark;
+    }
   }
 }

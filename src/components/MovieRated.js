@@ -14,7 +14,7 @@ const MovieRated = (props) => {
   useEffect(() => {
     setIsRated(props.isRated);
     setMovieRated(props.movieRated);
-  }, [props.isRated, props.movieRated, props.id]);
+  }, [props.isRated, props.movieRated]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -27,23 +27,24 @@ const MovieRated = (props) => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     const entireNumber = Number(parseInt(values.score, 10));
-
     await services.editrating(props.movieRated.id, entireNumber);
     const updateValuesMovie = await services.getrating(props.movieRated.id);
-
-    console.log(updateValuesMovie);
     props.setMovieRated(updateValuesMovie);
-    props.setIsRated(true);
   };
 
   return (
     <>
       {isRated ? (
-        <p>
+        <p className="movie__description paragraph">
           You rated this film with a score of <span>{movieRated.score}/5</span>
         </p>
       ) : (
-        <p>Rate this movie now!</p>
+        <div>
+          <p className="movie__description paragraph">
+            You don't reat this movie yet
+          </p>
+          <p className="movie__description paragraph">Rate it now!</p>
+        </div>
       )}
       <form onSubmit={isRated ? handleEditSubmit : handleFormSubmit}>
         <div className="rating">

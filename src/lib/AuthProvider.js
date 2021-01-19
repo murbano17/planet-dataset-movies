@@ -1,5 +1,5 @@
 import React from "react";
-import auth from "./AuthService"; // Importamos funciones para llamadas axios a la API
+import auth from "./AuthService";
 const { Consumer, Provider } = React.createContext();
 
 const withAuth = (WrappedComponent) => {
@@ -7,7 +7,16 @@ const withAuth = (WrappedComponent) => {
     render() {
       return (
         <Consumer>
-          {({ login, signup, user, logout, editprofile, isLogged }) => {
+          {({
+            login,
+            signup,
+            user,
+            logout,
+            editprofile,
+            isLogged,
+            errorSignup,
+            errorLogin,
+          }) => {
             return (
               <WrappedComponent
                 login={login}
@@ -16,6 +25,8 @@ const withAuth = (WrappedComponent) => {
                 logout={logout}
                 editprofile={editprofile}
                 isLogged={isLogged}
+                errorSignup={errorSignup}
+                errorLogin={errorLogin}
                 {...this.props}
               />
             );
@@ -26,9 +37,14 @@ const withAuth = (WrappedComponent) => {
   };
 };
 
-// Provider
 class AuthProvider extends React.Component {
-  state = { isLogged: false, user: null, isLoading: true };
+  state = {
+    isLogged: false,
+    user: null,
+    isLoading: true,
+    errorSignup: null,
+    errorLogin: null,
+  };
 
   componentDidMount() {
     auth
@@ -45,9 +61,12 @@ class AuthProvider extends React.Component {
     auth
       .signup({ firstName, lastName, email, password })
       .then((user) => this.setState({ isLogged: true, user: user.data.user }))
-      .catch(({ response }) =>
-        this.setState({ message: response.data.statusMessage })
-      );
+      .catch((response) => {
+        this.setState({
+          errorSignup:
+            "* Sign up failed. Check If this email is already registered",
+        });
+      });
   };
 
   me = async () => {
@@ -58,7 +77,12 @@ class AuthProvider extends React.Component {
     auth
       .login({ email, password })
       .then((user) => this.setState({ isLogged: true, user: user.data.user }))
-      .catch((err) => console.log(err));
+      .catch((response) => {
+        this.setState({
+          errorLogin:
+            "* Log in failed. Check If you are already registered or If your email and password are correct",
+        });
+      });
   };
 
   logout = () => {
@@ -74,24 +98,31 @@ class AuthProvider extends React.Component {
   };
 
   render() {
-    // destructuramos isLoading, isLoggedin y user de this.state y login, logout y signup de this
-    const { isLoading, isLogged, user } = this.state;
+    const { isLoading, isLogged, user, errorSignup, errorLogin } = this.state;
     const { login, logout, signup, me, editprofile } = this;
 
     return isLoading ? (
-      // si está loading, devuelve un <div> y sino devuelve un componente <Provider> con un objeto con los valores: { isLoggedin, user, login, logout, signup}
-      // el objeto pasado en la prop value estará disponible para todos los componentes <Consumer>
       <div>Loading</div>
     ) : (
       <Provider
-        value={{ isLogged, user, login, logout, signup, me, editprofile }}
+        value={{
+          isLogged,
+          user,
+          errorSignup,
+          errorLogin,
+          login,
+          logout,
+          signup,
+          me,
+          editprofile,
+        }}
       >
         {this.props.children}
       </Provider>
-    ); /*<Provider> "value={}" datos que estarán disponibles para todos los componentes <Consumer> */
+    );
   }
 }
 
-export { Consumer, withAuth }; //  <--	RECUERDA EXPORTAR  ! ! !
+export { Consumer, withAuth };
 
-export default AuthProvider; //	<--	RECUERDA EXPORTAR  ! ! !
+export default AuthProvider;

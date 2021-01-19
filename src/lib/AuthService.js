@@ -17,10 +17,10 @@ class Auth {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
       }
-
       return response;
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 
@@ -40,6 +40,7 @@ class Auth {
       return response;
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 
@@ -128,7 +129,7 @@ class Auth {
           "Content-Type": "application/json; charset=utf-8",
         },
       });
-      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -149,12 +150,17 @@ class Auth {
       console.log(error);
     }
   };
-  moviesrating = async () => {
+  moviesrating = async (direction) => {
+    console.log(direction);
     const url = this.baseUrl + `/ratings`;
     try {
       const response = await axios({
         method: "get",
         url: url,
+        params: {
+          'order': 'score',
+          'direction': direction,
+        },
         headers: {
           Authorization: authHeader(),
         },
@@ -179,7 +185,6 @@ class Auth {
           Authorization: authHeader(),
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -199,7 +204,37 @@ class Auth {
           Authorization: authHeader(),
         },
       });
-      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getAllMoviesUnrated = async () => {
+    const url = this.baseUrl + `/movies/unrated`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getRandomUnrated = async () => {
+    const url = this.baseUrl + `/movies/random_unrated`;
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization: authHeader(),
+        },
+      });
       return response.data;
     } catch (error) {
       console.log(error);

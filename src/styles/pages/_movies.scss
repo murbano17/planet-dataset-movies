@@ -11,20 +11,6 @@
       &:not(:last-child) {
         margin-bottom: 3rem;
       }
-
-      &:hover {
-        transform: translateY(-5px);
-      }
     }
-  }
-  &__img-container {
-    width: 25rem;
-    height: 35rem;
-  }
-
-  &__img {
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
   }
 }

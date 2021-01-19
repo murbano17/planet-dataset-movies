@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MyRatings } from "../components/MyRatings";
+import NotRated from "../components/NotRated";
+import RandomUnrated from "../components/RandomUnrated";
 
 const Ratings = () => {
   const [menu, setMenu] = useState("myRatings");
@@ -51,8 +53,8 @@ const Ratings = () => {
       </div>
 
       {menu === "myRatings" && <MyRatings />}
-      {menu === "allUnrated" ? <h1>allUnrated</h1> : null}
-      {menu === "randomUnrated" ? <h1>Random</h1> : null}
+      {menu === "allUnrated" && <NotRated />}
+      {menu === "randomUnrated" && <RandomUnrated />}
     </>
   );
 };

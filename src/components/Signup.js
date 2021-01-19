@@ -10,7 +10,7 @@ const SignUp = (props) => {
     email: "",
     password: "",
   });
-
+  console.log(props.errorMessage);
   const [handleInputValidations, message] = useValidationForm(values);
 
   const handleFormSubmit = (e) => {
@@ -74,7 +74,10 @@ const SignUp = (props) => {
         value={password}
         onChange={handleInputChange}
       />
-        {message && <p className="form-sign__error">{message}</p>} 
+      {message && <p className="form-sign__error">{message}</p>}
+      {props.errorSignup && (
+        <p className="form-sign__error">{props.errorSignup}</p>
+      )}
       <button className="btn btn-secondary" type="submit">
         Sign up
       </button>

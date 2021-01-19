@@ -8,11 +8,9 @@ export const MovieDetails = (props) => {
   const [movie, setMovie] = useState({});
   const [isRated, setIsRated] = useState(false);
   const [movieRated, setMovieRated] = useState({});
-  console.log(movieRated);
 
   useEffect(() => {
     let isCancelled = false;
-
     const getMovie = async () => {
       const movie = await getOneMovie();
       if (!isCancelled) {
@@ -20,7 +18,6 @@ export const MovieDetails = (props) => {
         getFilteredMovies();
       }
     };
-
     getMovie();
     return () => {
       isCancelled = true;
@@ -32,6 +29,7 @@ export const MovieDetails = (props) => {
     return movie;
   };
 
+  //comprobamos si la movie ha sido evaluada o no
   const getFilteredMovies = async () => {
     const moviesRated = await services.moviesrating();
     const movieDetail = await services.movieid(props.match.params.id);
@@ -54,7 +52,6 @@ export const MovieDetails = (props) => {
         movieRated={movieRated}
         setMovie={setMovie}
         setMovieRated={setMovieRated}
-
       />
     </>
   );

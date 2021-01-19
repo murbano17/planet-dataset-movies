@@ -45,6 +45,9 @@ const LogIn = (props) => {
         onChange={handleInputChange}
       />
       {message && <p className="form-sign__error">{message}</p>}
+      {props.errorLogin && (
+        <p className="form-sign__error">{props.errorLogin}</p>
+      )}
 
       <button className="btn btn-secondary" type="submit">
         Log in

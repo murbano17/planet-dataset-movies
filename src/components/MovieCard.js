@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
   return (
-    <Link to={`/movie/${movie.id}`}>
-      <div className="movie__img-container">
-        <img className="movie__img" src={movie.poster_url} alt={movie.title} />
+    <div className="cart">
+      <div className="cart__img-container">
+        <img className="cart__img" src={movie.poster_url} alt={movie.title} />
       </div>
-    </Link>
+      <div className='cart__info'>
+      <h2 className='cart__info-title'>{movie.title}</h2>
+      <Link to={`/movie/${movie.id}`}>
+        <button className="btn btn-tertiary">See details</button>{" "}
+      </Link>
+      </div>
+    </div>
   );
 };
 export default MovieCard;
