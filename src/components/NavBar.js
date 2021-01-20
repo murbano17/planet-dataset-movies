@@ -1,42 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../lib/AuthProvider";
 
-const Navbar = ({ logout, isLogged, user }) => {
+const Navbar = ({ logout, isLogged }) => {
   const [clicked, setClicked] = useState(false);
+
   const handleClick = () => {
     setClicked(!clicked);
   };
 
+  const logoutClick = () => {
+    setClicked(!clicked);
+    logout();
+  };
   return (
     <nav className="navbar">
-      <i onClick={handleClick} className={clicked ? "burger fa fa-times" : "burger fa fa-bars"}></i>
-      <ul className="navbar__list">
-        <li className="navbar__item">
-          <Link to="/">
-            <h1 className="navbar__logo">Planet Movies</h1>
-          </Link>
-        </li>
-        {isLogged ? (
-          <>
+      <Link to="/">
+        <h1 className="navbar__logo">Planet Movies</h1>
+      </Link>
+      {isLogged && (
+        <>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={clicked ? "fa fa-times" : "fa fa-bars"}></i>
+          </div>
+          <ul className={clicked ? "navbar__menu active" : "navbar__menu"}>
             <li>
-              <p>Hello {user.first_name}!</p>
+              <Link
+                to="/ratings"
+                className="navbar__links"
+                onClick={handleClick}
+              >
+                My ratings
+              </Link>
             </li>
             <li>
-              <button onClick={logout}>Logout</button>
+              <Link
+                to="/profile"
+                className="navbar__links"
+                onClick={handleClick}
+              >
+                My profile
+              </Link>
             </li>
-            <li>
-              <Link to="/profile">My profile</Link>
-            </li>
-            <li>
-              <Link to="/ratings">My ratings</Link>
-            </li>
-          </>
-        ) : (
-          <></>
-        )}
-      </ul>
+
+            <li onClick={logoutClick}>Logout</li>
+          </ul>
+        </>
+      )}
     </nav>
   );
 };
+
 export default withAuth(Navbar);

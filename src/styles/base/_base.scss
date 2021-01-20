@@ -12,6 +12,7 @@ html {
 }
 
 body {
+  padding: 0;
   box-sizing: border-box;
   background-color: $color-dark;
 }
@@ -19,4 +20,8 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+.content {
+  margin-top: 5rem;
+  padding: 3rem;
 }

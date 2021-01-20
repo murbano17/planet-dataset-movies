@@ -46,55 +46,72 @@ class AuthProvider extends React.Component {
     errorLogin: null,
   };
 
-  componentDidMount() {
-    auth
-      .me()
-      .then((user) =>
-        this.setState({ isLogged: true, user: user.data, isLoading: false })
-      )
-      .catch((err) =>
-        this.setState({ isLogged: false, user: null, isLoading: false })
-      );
-  }
+  componentDidMount = async () => {
+    try {
+      const user = await auth.me();
+      this.setState({ isLogged: true, user: user.data, isLoading: false });
+    } catch (error) {
+      this.setState({ isLogged: false, user: null, isLoading: false });
+    }
+  };
 
-  signup = ({ firstName, lastName, email, password }) => {
-    auth
-      .signup({ firstName, lastName, email, password })
-      .then((user) => this.setState({ isLogged: true, user: user.data.user }))
-      .catch((response) => {
-        this.setState({
-          errorSignup:
-            "* Sign up failed. Check If this email is already registered",
-        });
+  signup = async ({ firstName, lastName, email, password }) => {
+    try {
+      const signup = await auth.signup({
+        firstName,
+        lastName,
+        email,
+        password,
       });
+      this.setState({ isLogged: true, user: signup.data.user });
+    } catch (error) {
+      this.setState({
+        errorSignup:
+          "* Sign up failed. Check If this email is already registered",
+      });
+    }
   };
 
   me = async () => {
-    await auth.me();
+    try {
+      await auth.me();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  login = ({ email, password }) => {
-    auth
-      .login({ email, password })
-      .then((user) => this.setState({ isLogged: true, user: user.data.user }))
-      .catch((response) => {
-        this.setState({
-          errorLogin:
-            "* Log in failed. Check If you are already registered or If your email and password are correct",
-        });
+  login = async ({ email, password }) => {
+    try {
+      const login = await auth.login({ email, password });
+      this.setState({ isLogged: true, user: login.data.user });
+    } catch (error) {
+      this.setState({
+        errorLogin:
+          "* Log in failed. Check If you are already registered or If your email and password are correct",
       });
+    }
   };
 
-  logout = () => {
-    auth.logout();
-    this.setState({ isLogged: false, user: null });
+  logout = async () => {
+    try {
+      await auth.logout();
+      this.setState({ isLogged: false, user: null });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  editprofile = ({ first_name, last_name, password }) => {
-    auth
-      .editprofile({ first_name, last_name, password })
-      .then((user) => this.setState({ isLogged: true, user: user }))
-      .catch((err) => console.log(err));
+  editprofile = async ({ first_name, last_name, password }) => {
+    try {
+      const editUser = await auth.editprofile({
+        first_name,
+        last_name,
+        password,
+      });
+      this.setState({ isLogged: true, user: editUser });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {

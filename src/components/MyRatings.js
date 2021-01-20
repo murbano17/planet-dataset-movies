@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import services from "../lib/AuthService";
 import MovieCard from "./MovieCard";
+import Spinner from "./Spinner";
 
 export const MyRatings = () => {
   const [moviesRated, setMoviesRated] = useState([]);
   const [direction, setDirection] = useState("asc");
-  const [moviesSorted, setMoviesAsc] = useState([]);
-  
+  const [moviesSorted, setMoviesSorted] = useState(false);
+  const [moviesSortedAscDesc, setMoviesSortedAscDesc] = useState([]);
+
   useEffect(() => {
     let isCancelled = false;
     const getMoviesRated = async () => {
@@ -19,7 +22,7 @@ export const MyRatings = () => {
     return () => {
       isCancelled = true;
     };
-  }, []);
+  }, [moviesSorted]);
 
   const handleChange = (event) => {
     setDirection(event.target.value);
@@ -28,24 +31,39 @@ export const MyRatings = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const moviesSorted = await services.moviesrating(direction);
-    setMoviesAsc(moviesSorted);
+    setMoviesSorted(true);
+    setMoviesSortedAscDesc(moviesSorted);
   };
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
-        <label>Sort by score:</label>
+      {moviesRated.length > 0 ? (
+        <form onSubmit={handleFormSubmit}>
+          <label>Sort by score:</label>
 
-        <select value={direction} onChange={handleChange}>
-          <option value="asc">Ascendent</option>
-          <option value="desc">Descendent</option>
-        </select>
-        <input type="submit" value="Submit" />
-      </form>
+          <select value={direction} onChange={handleChange}>
+            <option value="asc">Ascendent</option>
+            <option value="desc">Descendent</option>
+          </select>
+          <input type="submit" value="Submit" />
+        </form>
+      ) : (
+        <div>
+          <p>No movies rated yet</p>
+          <Link to="/movies">Explore all the movies</Link>
+        </div>
+      )}
 
-      {moviesRated.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
+      {!moviesSorted &&
+        moviesRated.length > 0 &&
+        moviesRated.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+
+      {moviesSorted &&
+        moviesSortedAscDesc.map((movie) => (
+          <>
+            <MovieCard key={movie.movie.id} movie={movie.movie} />
+          </>
+        ))}
     </div>
   );
 };

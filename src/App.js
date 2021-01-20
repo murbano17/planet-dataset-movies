@@ -16,17 +16,19 @@ class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <div className="container">
+        <div>
           <Switch>
             <Navbar />
-            <AnonRoute exact path="/" component={Home} />
-            <PrivateRoute exact path="/movies" component={AllMovies} />
-            <PrivateRoute path="/movie/:id" component={MovieDetails} />
-            <PrivateRoute exact path="/profile" component={Profile} />
-            <PrivateRoute exact path="/rate/:id" component={MovieRated} />
-            <PrivateRoute exact path="/rate/:id" component={MovieRated} />
-            <PrivateRoute exact path="/ratings" component={Ratings} />
-            <Redirect to="/" />
+            <div className='content'>
+              <AnonRoute exact path="/" component={Home} />
+              <PrivateRoute exact path="/movies" component={AllMovies} />
+              <PrivateRoute path="/movie/:id" component={MovieDetails} />
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/rate/:id" component={MovieRated} />
+              <PrivateRoute exact path="/rate/:id" component={MovieRated} />
+              <PrivateRoute exact path="/ratings" component={Ratings} />
+              <Redirect to="/" />
+            </div>
           </Switch>
         </div>
       </AuthProvider>

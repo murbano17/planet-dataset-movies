@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { withAuth } from "../lib/AuthProvider";
 import { useForm } from "../custom-hooks/useForm";
 
 const EditProfile = (props) => {
+  const [message, setMessage] = useState("");
+
   const { first_name, last_name } = props.user;
 
   const [values, handleInputChange] = useForm({
@@ -11,15 +14,11 @@ const EditProfile = (props) => {
     password: "",
   });
 
-  const [message, setMessage] = useState("");
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     props.editprofile(values);
     setMessage("Profile edited");
   };
-
-  //comprobar si almenys 1 camp està complet
 
   return (
     <div>
@@ -64,7 +63,7 @@ const EditProfile = (props) => {
         <button className="btn btn-secondary" type="submit">
           Edit profile
         </button>
-        {message && <p className="form-sign__error">{message}</p>}
+        {message && <p className="form-sign__success">{message}</p>}
       </form>
     </div>
   );

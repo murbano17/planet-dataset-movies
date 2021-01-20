@@ -10,7 +10,7 @@ const SignUp = (props) => {
     email: "",
     password: "",
   });
-  console.log(props.errorMessage);
+
   const [handleInputValidations, message] = useValidationForm(values);
 
   const handleFormSubmit = (e) => {
