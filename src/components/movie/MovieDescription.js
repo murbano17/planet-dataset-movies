@@ -1,6 +1,7 @@
 import React from "react";
 import { withAuth } from "../../lib/AuthProvider";
 import MovieRated from "../ratings/MovieRated";
+import { Link } from "react-router-dom";
 
 const MovieDescription = ({
   movie,
@@ -12,6 +13,7 @@ const MovieDescription = ({
 }) => {
   return (
     <div className="movie-detail">
+
       <div className="movie-detail__image-container">
         <img
           className="movie-detail__image"

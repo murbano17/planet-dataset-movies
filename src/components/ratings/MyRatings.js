@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import services from "../../lib/AuthService";
 import MovieCard from "../movie/MovieCard";
-import Spinner from "../Spinner";
 
 export const MyRatings = () => {
   const [moviesRated, setMoviesRated] = useState([]);

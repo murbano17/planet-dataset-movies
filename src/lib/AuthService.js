@@ -11,8 +11,10 @@ class Auth {
     formData.append("user[last_name]", lastName);
     formData.append("user[email]", email);
     formData.append("user[password]", password);
+    const url = this.baseUrl + "/users";
+
     try {
-      const response = await axios.post(this.baseUrl + "/users", formData);
+      const response = await axios.post(url, formData);
 
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
@@ -28,11 +30,10 @@ class Auth {
     let formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
+    const url = this.baseUrl + "/users/login";
+
     try {
-      const response = await axios.post(
-        this.baseUrl + "/users/login",
-        formData
-      );
+      const response = await axios.post(url, formData);
 
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
@@ -49,8 +50,10 @@ class Auth {
   };
 
   me = async () => {
+    const url = this.baseUrl + "/users/profile";
+
     try {
-      const response = await axios.get(this.baseUrl + "/users/profile", {
+      const response = await axios.get(url, {
         headers: {
           Authorization: authHeader(),
         },

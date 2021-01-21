@@ -2,4 +2,9 @@
   padding: 2rem;
   width: 100vw;
 
+  &__sub-menu {
+    @include res-desk {
+      margin-left: 6rem;
+    }
+  }
 }

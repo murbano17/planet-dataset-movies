@@ -1,6 +1,8 @@
 .details-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 5rem;
+
 
   @include res-desk {
     flex-direction: row;
@@ -10,6 +12,7 @@
 
 .movie-detail {
   padding: 2rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
