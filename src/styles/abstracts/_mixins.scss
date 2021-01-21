@@ -18,3 +18,9 @@
     @content;
   }
 }
+
+@mixin navbar {
+  @media (max-width: 900px) {
+    @content;
+  }
+}

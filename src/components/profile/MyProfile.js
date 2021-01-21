@@ -7,15 +7,15 @@ const MyProfile = ({ user }) => {
     <div className="profile__my-profile">
       <p className="profile__my-profile-info">
         <span className="profile__my-profile-label">First name:</span>{" "}
-        {first_name}
+        <p className="profile__name">{first_name}</p>
       </p>
       <p className="profile__my-profile-info">
         <span className="profile__my-profile-label">Last name:</span>{" "}
-        {last_name}
+        <p className="profile__name">{last_name}</p>
       </p>
       <p className="profile__my-profile-info">
         <span className="profile__my-profile-label">Email: </span>
-        {email}
+       {email}
       </p>
     </div>
   );

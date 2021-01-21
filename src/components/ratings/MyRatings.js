@@ -60,9 +60,9 @@ export const MyRatings = () => {
           </div>
         </form>
       ) : (
-        <div>
+        <div className='message__no-rated'>
           <p>No movies rated yet</p>
-          <Link to="/movies">Explore all the movies</Link>
+          <Link to="/movies"><button className='btn btn-secondary'>Explore</button></Link>
         </div>
       )}
       <ul className="movie__list">

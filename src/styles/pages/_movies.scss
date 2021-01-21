@@ -1,3 +1,17 @@
+.all-movies-container {
+  margin: 4rem 0rem;
+  h1 {
+    margin-left: 1rem;
+    border-bottom: 3px solid $color-yellow;
+    @include res-tablet{
+      margin-left: 4rem;
+  
+    }
+  }
+
+ 
+}
+
 .movie {
   &__list {
     display: flex;

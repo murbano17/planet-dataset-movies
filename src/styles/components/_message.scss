@@ -1,0 +1,11 @@
+.message {
+  &__no-rated {
+    background-color: $color-dark-4;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    p {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+  }
+}

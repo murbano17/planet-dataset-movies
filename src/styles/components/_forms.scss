@@ -83,14 +83,11 @@
       width: 220px;
       border: 0;
       position: relative;
-      z-index: 99;
+      z-index: 1;
       background: none;
       color: $color-white;
       font-size: 1.6rem;
 
-      option {
-        background-color: $color-dark-4;
-      }
     }
   }
 }

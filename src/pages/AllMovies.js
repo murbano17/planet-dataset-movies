@@ -22,7 +22,8 @@ const AllMovies = () => {
   }, []);
 
   return (
-    <>
+    <div className="all-movies-container">
+      <h1 className="heading__h1">Explore</h1>
       <ul className="movie__list">
         {movies.map((movie) => {
           return (
@@ -32,7 +33,7 @@ const AllMovies = () => {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

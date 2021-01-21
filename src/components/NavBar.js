@@ -55,7 +55,7 @@ const Navbar = ({ logout, isLogged }) => {
             </li>
 
             <li className="navbar__links-mobile" onClick={logoutClick}>
-              Logout
+              Log out
             </li>
           </ul>
         </>

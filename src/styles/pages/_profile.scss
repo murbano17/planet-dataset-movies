@@ -15,6 +15,13 @@
     font-size: 4rem;
     margin-bottom: 2rem;
   }
+
+  &__name {
+    display: inline-block;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
   &__my-profile {
     background-color: rgba($color-white, 0.1);
     padding: 3rem;
