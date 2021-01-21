@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import services from "../lib/AuthService";
 import { withAuth } from "../lib/AuthProvider";
 
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../components/movie/MovieCard";
 
 const AllMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -21,12 +21,8 @@ const AllMovies = () => {
     };
   }, []);
 
-
-
-
   return (
     <>
-      <h1 className="heading__h1">Explore</h1>
       <ul className="movie__list">
         {movies.map((movie) => {
           return (

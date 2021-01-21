@@ -1,7 +1,14 @@
 .profile {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 100%;
+  height: 50rem;
+  align-self: center;
+  padding: 2rem;
+  @include res-tablet {
+    width: 60%;
+    margin-top: 7rem;
+  }
 
   &__welcome {
     display: inline-block;
@@ -13,10 +20,12 @@
     padding: 3rem;
     margin-top: 2rem;
     font-size: 1.6rem;
-    &-info {
+    @include res-tablet {
+      width: 70%;
     }
+
     &-label {
-      color: $color-blue;
+      color: $color-yellow;
     }
   }
 }

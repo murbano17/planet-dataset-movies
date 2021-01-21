@@ -25,16 +25,15 @@ class Auth {
   };
 
   login = async ({ email, password }) => {
-    const url = this.baseUrl + `/users/login`;
+    let formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
     try {
-      const response = await axios({
-        method: "post",
-        url: url,
-        data: {
-          email: email,
-          password: password,
-        },
-      });
+      const response = await axios.post(
+        this.baseUrl + "/users/login",
+        formData
+      );
+
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.token));
       }
@@ -50,16 +49,13 @@ class Auth {
   };
 
   me = async () => {
-    const url = this.baseUrl + `/users/profile`;
     try {
-      const response = await axios({
-        method: "get",
-        url: url,
+      const response = await axios.get(this.baseUrl + "/users/profile", {
         headers: {
           Authorization: authHeader(),
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -154,8 +150,8 @@ class Auth {
       console.log(error);
     }
   };
-
   moviesrating = async (direction) => {
+    console.log(direction);
     const url = this.baseUrl + `/ratings`;
     try {
       const response = await axios({

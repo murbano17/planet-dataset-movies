@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import services from "../lib/AuthService";
-import MovieCard from "./MovieCard";
+import services from "../../lib/AuthService";
+import MovieCard from "../movie/MovieCard";
 
 const NotRated = () => {
   const [moviesNotRated, setMoviesNotRated] = useState([]);

@@ -19,6 +19,7 @@
   }
 
   &-secondary {
+    display: inline-block;
     padding: 1rem;
     font-weight: 600;
     font-size: 1.8rem;
@@ -27,6 +28,7 @@
     border: 0.3rem solid $color-dark;
     background-color: $color-yellow;
     transition: all 0.3s ease-in-out;
+    width: 20rem;
 
     &:hover {
       background-color: darken($color-yellow, 8);
@@ -50,6 +52,18 @@
     &:hover {
       background-color: darken($color-yellow, 8);
       color: $color-dark;
+    }
+  }
+  &-select {
+    background-color: $color-yellow;
+    color: $color-dark;
+    font-size: 1.6rem;
+    width: 12rem;
+
+    &:hover {
+      background-color: $color-dark;
+      color: $color-white;
+      border: 1px solid $color-yellow;
     }
   }
 }

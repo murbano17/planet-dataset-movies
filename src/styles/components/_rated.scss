@@ -27,14 +27,42 @@
       transition: 0.5s;
     }
   }
+
+  &__buttons {
+    margin-top: 5rem;
+  }
+  &__score-paragraph {
+    font-size: 2rem;
+    color: $color-dark-4;
+    font-weight: 700;
+  }
+  &__score-now {
+    font-size: 2rem;
+    color: $color-dark-4;
+    font-weight: 700;
+    color: $color-yellow;
+  }
+  &__score,
+  &__score-2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+  &__score {
+    font-size: 2.4rem;
+    color: $color-yellow;
+  }
+
+  &__star {
+    color: $color-yellow;
+    font-size: 2rem;
+    padding-left: 1rem;
+  }
 }
 .rating label:hover:after,
 .rating label:hover ~ label:after,
 .rating input:checked ~ label:after {
   opacity: 1;
-}
-.margin-top {
-  margin-top: 4rem;
 }
 
 .icon::after {

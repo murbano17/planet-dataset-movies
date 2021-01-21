@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Signup from "../components/Signup";
-import Login from "../components/Login";
+import Signup from "../components/register/Signup";
+import Login from "../components/register/Login";
 import { withAuth } from "../lib/AuthProvider";
 
-const Home = () => {
+const Register = () => {
   const [signup, setSignup] = useState(true);
 
   const toggleHandlerSignup = () => {
@@ -20,7 +20,6 @@ const Home = () => {
       ) : (
         <h2 className="home__welcome">Welcome back!</h2>
       )}
-
       <div className="home__buttons-container">
         <button
           onClick={() => toggleHandlerSignup()}
@@ -34,10 +33,10 @@ const Home = () => {
         >
           Log In
         </button>
+        {signup ? <Signup /> : <Login />}
       </div>
-      {signup ? <Signup /> : <Login />}
     </div>
   );
 };
 
-export default withAuth(Home);
+export default withAuth(Register);

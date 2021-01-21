@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import services from "../lib/AuthService";
-import MovieCard from "./MovieCard";
+import services from "../../lib/AuthService";
+import MovieCard from "../movie/MovieCard";
 
 const RandomUnrated = () => {
   const [randomUnrated, setRandomUnrated] = useState({});
@@ -20,6 +20,12 @@ const RandomUnrated = () => {
     };
   }, []);
 
-  return <MovieCard movie={randomUnrated} />;
+  return (
+    <ul className="movie__list">
+      <li className="movie__list-item">
+        <MovieCard movie={randomUnrated} />
+      </li>
+    </ul>
+  );
 };
 export default RandomUnrated;

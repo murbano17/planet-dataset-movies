@@ -1,7 +1,7 @@
 import React from "react";
-import { withAuth } from "../lib/AuthProvider";
-import { useForm } from "../custom-hooks/useForm";
-import { useValidationForm } from "../custom-hooks/validationForm";
+import { withAuth } from "../../lib/AuthProvider";
+import { useForm } from "../../custom-hooks/useForm"
+import { useValidationForm } from "../../custom-hooks/validationForm";
 
 const SignUp = (props) => {
   const [values, handleInputChange] = useForm({

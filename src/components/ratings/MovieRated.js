@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { withAuth } from "../lib/AuthProvider";
-import { useForm } from "../custom-hooks/useForm";
+import { withAuth } from "../../lib/AuthProvider";
+import { useForm } from "../../custom-hooks/useForm";
 import { parseInt } from "lodash";
-import services from "../lib/AuthService";
+import services from "../../lib/AuthService";
 
 const MovieRated = (props) => {
   const [values, handleInputChange] = useForm({
@@ -33,17 +33,16 @@ const MovieRated = (props) => {
   };
 
   return (
-    <>
+    <div>
       {isRated ? (
-        <p className="movie__description paragraph">
-          You rated this film with a score of <span>{movieRated.score}/5</span>
+        <p className="rating__score-paragraph">
+          You rated this film with a score of{" "}
+          <span className="rating__score">{movieRated.score}</span>
+          <span className="rating__score-2">/5</span>
         </p>
       ) : (
         <div>
-          <p className="movie__description paragraph">
-            You don't reat this movie yet
-          </p>
-          <p className="movie__description paragraph">Rate it now!</p>
+          <p className="rating__score-now">Rate it now!</p>
         </div>
       )}
       <form onSubmit={isRated ? handleEditSubmit : handleFormSubmit}>
@@ -90,17 +89,18 @@ const MovieRated = (props) => {
           />
           <label htmlFor="rate-1"></label>
         </div>
+
         {isRated ? (
-          <button className="btn btn-secondary margin-top" type="submit">
+          <button className="btn btn-secondary rating__buttons " type="submit">
             Update Rate
           </button>
         ) : (
-          <button className="btn btn-secondary margin-top" type="submit">
+          <button className="btn btn-secondary rating__buttons " type="submit">
             Rate
           </button>
         )}
       </form>
-    </>
+    </div>
   );
 };
 export default withAuth(MovieRated);

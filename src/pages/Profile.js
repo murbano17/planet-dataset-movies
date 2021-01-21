@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EditProfile from "../components/EditProfile";
-import MyProfile from "../components/MyProfile";
+import EditProfile from "../components/profile/EditProfile";
+import MyProfile from "../components/profile/MyProfile";
 
 import { withAuth } from "../lib/AuthProvider";
 

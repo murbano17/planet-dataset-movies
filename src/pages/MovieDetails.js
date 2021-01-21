@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withAuth } from "../lib/AuthProvider";
 import services from "../lib/AuthService";
-import MovieRated from "../components/MovieRated";
-import MovieDescription from "../components/MovieDescription";
+import MovieDescription from "../components/movie/MovieDescription";
 
 export const MovieDetails = (props) => {
   const [movie, setMovie] = useState({});
@@ -42,10 +41,9 @@ export const MovieDetails = (props) => {
   };
 
   return (
-    <>
-      <MovieDescription movie={movie} />
-
-      <MovieRated
+    <div className="details-container">
+      <MovieDescription
+        movie={movie}
         id={movie.id}
         setIsRated={setIsRated}
         isRated={isRated}
@@ -53,7 +51,7 @@ export const MovieDetails = (props) => {
         setMovie={setMovie}
         setMovieRated={setMovieRated}
       />
-    </>
+    </div>
   );
 };
 export default withAuth(MovieDetails);

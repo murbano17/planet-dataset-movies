@@ -16,7 +16,9 @@ const Navbar = ({ logout, isLogged }) => {
   return (
     <nav className="navbar">
       <Link to="/">
-        <h1 className="navbar__logo">Planet Movies</h1>
+        <h1 className="navbar__logo">
+          Planet Movies <span>.</span>
+        </h1>
       </Link>
       {isLogged && (
         <>
@@ -24,6 +26,15 @@ const Navbar = ({ logout, isLogged }) => {
             <i className={clicked ? "fa fa-times" : "fa fa-bars"}></i>
           </div>
           <ul className={clicked ? "navbar__menu active" : "navbar__menu"}>
+            <li>
+              <Link
+                to="/movies"
+                className="navbar__links"
+                onClick={handleClick}
+              >
+                All movies
+              </Link>
+            </li>
             <li>
               <Link
                 to="/ratings"
@@ -43,7 +54,9 @@ const Navbar = ({ logout, isLogged }) => {
               </Link>
             </li>
 
-            <li onClick={logoutClick}>Logout</li>
+            <li className="navbar__links-mobile" onClick={logoutClick}>
+              Logout
+            </li>
           </ul>
         </>
       )}

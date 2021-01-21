@@ -57,27 +57,20 @@ class AuthProvider extends React.Component {
 
   signup = async ({ firstName, lastName, email, password }) => {
     try {
-      const signup = await auth.signup({
+      const signUp = await auth.signup({
         firstName,
         lastName,
         email,
         password,
       });
-      this.setState({ isLogged: true, user: signup.data.user });
+      this.setState({ isLogged: true, user: signUp.data.user });
     } catch (error) {
-      this.setState({
-        errorSignup:
-          "* Sign up failed. Check If this email is already registered",
-      });
+      console.log(error);
     }
   };
 
   me = async () => {
-    try {
-      await auth.me();
-    } catch (error) {
-      console.log(error);
-    }
+    await auth.me();
   };
 
   login = async ({ email, password }) => {
@@ -92,23 +85,20 @@ class AuthProvider extends React.Component {
     }
   };
 
-  logout = async () => {
-    try {
-      await auth.logout();
-      this.setState({ isLogged: false, user: null });
-    } catch (error) {
-      console.log(error);
-    }
+  logout = () => {
+    auth.logout();
+    this.setState({ isLogged: false, user: null });
   };
 
   editprofile = async ({ first_name, last_name, password }) => {
     try {
-      const editUser = await auth.editprofile({
+      const editProfile = await auth.editprofile({
         first_name,
         last_name,
         password,
       });
-      this.setState({ isLogged: true, user: editUser });
+      console.log(editProfile);
+      this.setState({ isLogged: true, user: editProfile });
     } catch (error) {
       console.log(error);
     }

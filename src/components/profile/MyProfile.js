@@ -1,5 +1,5 @@
 import React from "react";
-import { withAuth } from "../lib/AuthProvider";
+import { withAuth } from "../../lib/AuthProvider";
 
 const MyProfile = ({ user }) => {
   const { first_name, last_name, email } = user;

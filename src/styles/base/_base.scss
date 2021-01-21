@@ -21,7 +21,14 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 .content {
-  margin-top: 5rem;
-  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

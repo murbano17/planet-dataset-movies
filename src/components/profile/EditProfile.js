@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { withAuth } from "../lib/AuthProvider";
-import { useForm } from "../custom-hooks/useForm";
+import { withAuth } from "../../lib/AuthProvider";
+import { useForm } from "../../custom-hooks/useForm";
 
 const EditProfile = (props) => {
   const [message, setMessage] = useState("");
@@ -21,7 +21,6 @@ const EditProfile = (props) => {
   };
 
   return (
-    <div>
       <form className="form-sign" onSubmit={handleFormSubmit}>
         <label className="form-sign__label" htmlFor="sign-first-name">
           First name <span className="form-sign__label--required">*</span>
@@ -65,7 +64,6 @@ const EditProfile = (props) => {
         </button>
         {message && <p className="form-sign__success">{message}</p>}
       </form>
-    </div>
   );
 };
 export default withAuth(EditProfile);
