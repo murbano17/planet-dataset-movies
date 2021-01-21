@@ -154,7 +154,6 @@ class Auth {
     }
   };
   moviesrating = async (direction) => {
-    console.log(direction);
     const url = this.baseUrl + `/ratings`;
     try {
       const response = await axios({

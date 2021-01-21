@@ -8,7 +8,6 @@ export const MyRatings = () => {
   const [direction, setDirection] = useState("asc");
   const [moviesSorted, setMoviesSorted] = useState(false);
   const [moviesSortedAscDesc, setMoviesSortedAscDesc] = useState([]);
-  console.log(moviesSortedAscDesc);
   useEffect(() => {
     let isCancelled = false;
     const getMoviesRated = async () => {

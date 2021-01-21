@@ -97,7 +97,6 @@ class AuthProvider extends React.Component {
         last_name,
         password,
       });
-      console.log(editProfile);
       this.setState({ isLogged: true, user: editProfile });
     } catch (error) {
       console.log(error);

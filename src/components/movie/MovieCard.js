@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie, score }) => {
-  console.log(score);
   return (
     <Link to={`/movie/${movie.id}`}>
       <div className={score ? "card-score" : "card"}>
