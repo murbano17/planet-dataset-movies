@@ -54,11 +54,9 @@ export const MyRatings = () => {
                 </option>
               </select>
             </div>
-            <input
-              className="btn btn-select"
-              type="submit"
-              value="Sort by score"
-            />
+            <button className="btn btn-select" type="submit">
+              Sort by score
+            </button>
           </div>
         </form>
       ) : (
