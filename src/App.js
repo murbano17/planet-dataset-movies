@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./styles/styles.scss";
-import { BrowserRouter as Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Switch } from "react-router-dom";
 import AuthProvider from "./lib/AuthProvider";
 import AnonRoute from "./components/routes/AnonRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";

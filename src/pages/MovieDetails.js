@@ -37,6 +37,7 @@ export const MovieDetails = (props) => {
         setMovieRated(oneMovie);
         setIsRated(true);
       }
+      
     });
   };
 

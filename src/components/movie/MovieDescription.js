@@ -1,7 +1,6 @@
 import React from "react";
 import { withAuth } from "../../lib/AuthProvider";
 import MovieRated from "../ratings/MovieRated";
-import { Link } from "react-router-dom";
 
 const MovieDescription = ({
   movie,
