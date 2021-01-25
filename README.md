@@ -31,7 +31,7 @@ Ejecutamos el proyecto en local
 
 
 ```
-npm start*
+npm start
 ```
 
 ## Construido con 🛠️
